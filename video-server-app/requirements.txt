@@ -1,0 +1,4 @@
+honcho==1.0.1
+gunicorn==19.7.1
+git+https://github.com/superdesk/video-server.git
+
