@@ -1,5 +1,15 @@
-uploads/thumbnails/*
-uploads/videos/*
+# Bỏ qua tất cả các tệp hình ảnh trong thư mục thumbnails
+uploads/thumbnails/*.jpg
+uploads/thumbnails/*.png
+uploads/thumbnails/*.gif
+uploads/thumbnails/*.jpeg
+
+# Bỏ qua tất cả các tệp video trong thư mục videos
+uploads/videos/*.mp4
+uploads/videos/*.avi
+uploads/videos/*.mkv
+uploads/videos/*.mov
+
 
 # Logs
 logs
