@@ -1,0 +1,17 @@
+<%- include ("includes/header") %>
+
+
+
+<div class="container-fluid">
+   <h1 class="text-center">
+       Remove audio
+   </h1>
+   
+   <form action="/tool_remove_video" method="post" enctype="multipart/form-data">
+      <input type="file" name="video" required>      
+      <input type="submit" value="Remove Audio">
+   </form>
+
+ </div>
+
+<%- include ("includes/footer") %>

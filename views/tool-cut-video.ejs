@@ -1,0 +1,25 @@
+<%- include ("includes/header") %>
+
+
+<div class="container-fluid">
+
+<form method="POST" action="/tool_cut_video" enctype="multipart/form-data">            
+  <div class="form-group">
+    <input type="file" name="video" required>
+     <label for="startTime">Start</label>
+     <input type="text" id="startTime" name="startTime" class="form-control" style="width: 80%;"  required>
+  </div>
+
+  <div class="form-group">
+     <label for="duration">Duration</label>
+     <input type="text" id="duration" name="duration" class="form-control" style="width: 80%;"  required>
+  </div>
+
+  <div class="osahan-area text-center mt-3">
+      <button class="btn btn-outline-primary" type="submit">Cut</button>                                                     
+  </div>
+</form>
+
+</div>
+
+<%- include ("includes/footer") %>

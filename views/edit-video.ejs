@@ -1,0 +1,243 @@
+<%- include ("includes/header") %>
+
+<form method="POST" action="/edit?v=<%= video.watch %>" enctype="multipart/form-data">
+	
+	<input type="hidden" name="videoId" value="<%= video._id %>">
+	<input type="hidden" name="thumbnailPath" value="<%= video.thumbnail %>">
+
+	<div class="container-fluid upload-details">
+
+		<div class="row">
+			<div class="col-md-12">
+				<% if (typeof message !== "undefined") { %>
+					<div class="alert alert-success">
+						<%= message %>
+					</div>
+				<% } %>
+			</div>
+		</div>
+
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="main-title">
+                <h6>Video Details</h6>
+             </div>
+          </div>
+          <div class="col-lg-10">
+             <div class="imgplace1">
+               <video
+               id="videoPlayer"
+               class="video-js"
+               controls
+               width="550"
+               height="300"
+               preload="auto"
+               data-setup="{}"
+               src="<%= video.filePath %>"
+               poster="<%= video.thumbnail %>">
+               <source src="<%= video.filePath %>" type="video/mp4" />
+                 <source src="<%= video.filePath %>" type="video/webm" />
+                   <p class="vjs-no-js">
+                     To view this video please enable JavaScript, and consider upgrading to a
+                     web browser that
+                     <a href="https://videojs.com/html5-video-support/" target="_blank"
+                     >supports HTML5 video</a
+                     >
+                   </p>
+                 </video>
+			       </div>
+          </div>
+        
+          
+          
+       </div>
+       <hr>
+       <div class="row">
+         <div class="col-lg-12">
+         <div class="edit-video" style="width: 100%;">
+            <div class="edit-video-cut" style="border: 1px solid coral;border-radius: 10px;width: 30%;display: flex;align-items: center;">                                                         
+            </div>
+           
+            </div>
+         </div>
+       </div>
+       <hr>
+       	<div class="row">
+          <div class="col-lg-12">
+             <div class="osahan-form">
+
+             	<div class="row">
+             		<div class="col-md-12">
+             			<div class="form-group">
+             				<label>Select thumbnail</label>
+             				<input type="file" name="thumbnail" onchange="previewThumnail(this);" accept="image/*">
+             			</div>
+             		</div>
+             	</div>
+
+             	<script type="text/javascript">
+             		function previewThumnail(file) {
+             			var fileReader = new FileReader();
+             			fileReader.onload = function (e) {
+             				document.getElementById("thumbnail").setAttribute("src", e.target.result);
+             			};
+             			fileReader.readAsDataURL(file.files[0]);
+             		}
+             	</script>
+
+                <div class="row">
+                   <div class="col-lg-12">
+                      <div class="form-group">
+                         <label for="input-video-title">Title</label>
+                         <input type="text" name="title" id="input-video-title" class="form-control" value="<%= video.title %>">
+                      </div>
+                   </div>
+                   <div class="col-lg-12">
+                      <div class="form-group">
+                         <label for="description">Description</label>
+                         <textarea rows="5" id="description" name="description" class="form-control"><%= video.description %></textarea>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-lg-5">
+                      <div class="form-group">
+                         <label for="tags">Tags (comma separated)</label>
+                         <input type="text" id="tags" name="tags" class="form-control" value="<%= video.tags %>">
+                      </div>
+                   </div>
+
+                   <div class="col-lg-5">
+                      <div class="form-group">
+                         <label for="category">Category</label>
+                         <select id="category" name="category" class="form-control">
+                              <option value="Music" <%= video.category == 'Music' ? 'selected' : '' %>>Music</option>
+                              <option value="Movie" <%= video.category == 'Movie' ? 'selected' : '' %>>Movie</option>
+                              <option value="Technology" <%= video.category == 'Technology' ? 'selected' : '' %>>Technology</option>
+                              <option value="Gaming" <%= video.category == 'Gaming' ? 'selected' : '' %>>Gaming</option>
+                              <option value="Education" <%= video.category == 'Education' ? 'selected' : '' %>>Education</option>
+                              <option value="Unboxing" <%= video.category == 'Unboxing' ? 'selected' : '' %>>Unboxing</option>
+                              <option value="Challenge" <%= video.category == 'Challenge' ? 'selected' : '' %>>Challenge</option>
+                              <option value="Comedy" <%= video.category == 'Comedy' ? 'selected' : '' %>>Comedy</option>
+                              <option value="Vlogs" <%= video.category == 'Vlogs' ? 'selected' : '' %>>Vlogs</option>
+                              <option value="How-To" <%= video.category == 'How-To' ? 'selected' : '' %>>How-To</option>
+                              <option value="Product Review" <%= video.category == 'Product Review' ? 'selected' : '' %>>Product Review</option>
+                         </select>
+                      </div>
+                   </div>
+                </div>
+
+             </div>
+
+             <div class="osahan-area text-center mt-3">
+                <button class="btn btn-outline-primary" type="submit">Save Changes</button>
+                <p id="save-status" style="margin-top: 10px;"></p>
+
+				<a href="/delete-video?v=<%= video.watch %>" class="btn btn-danger border-none" onclick="return confirm('Are you sure you want to delete this video ?');">Delete video</a>
+             </div>
+             <hr>
+          </div>
+       </div>
+   		
+    </div>
+    <!-- /.container-fluid -->
+
+    <input type="hidden" id="videoId" value="<%= video._id %>">
+
+</form>
+
+    <script type="text/javascript">
+       function saveVideo() {
+          var ajax = new XMLHttpRequest();
+          ajax.open("POST", "/update-video", true);
+          ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+          ajax.onreadystatechange = function () {
+             if (this.readyState == 4 && this.status == 200) {
+             	var response = JSON.parse(this.responseText);
+
+                document.getElementById("save-status").setAttribute("class", "text-" + response.status);
+                document.getElementById("save-status").innerHTML = response.message;
+             }
+          };
+
+          var title = document.getElementById("input-video-title").value;
+          var description = document.getElementById("description").value;
+          var tags = document.getElementById("tags").value;
+          var category = document.getElementById("category").value;
+          var videoId = document.getElementById("videoId").value;
+		  var playlist = document.getElementById("playlist").value;
+
+          ajax.send("title=" + title + "&description=" + description + "&tags=" + tags + "&videoId=" + videoId + "&category=" + category + "&playlist=" + playlist);
+       }
+
+
+   //     $(document).ready(function() {
+   //    $('#videoCutForm').submit(function(event) {
+   //      event.preventDefault();
+   //      var formData = $(this).serialize();
+
+   //      $.ajax({
+   //        url: '/cut-video',
+   //        type: 'POST',
+   //        data: formData,
+   //        success: function(response) {
+   //          $('#message').text(response);
+   //        },
+   //        error: function(xhr, status, error) {
+   //          $('#message').text('Lỗi khi gửi yêu cầu cắt video.');
+   //          console.log(error);
+   //        }
+   //      });
+   //    });
+   //  });
+     
+    </script>
+    <script>
+      function cutAndDownload() {
+        var video = document.getElementById('videoPlayer');
+        var startTime = document.getElementById('startTime').value; // Thời điểm bắt đầu cắt (giây)
+        var endTime = document.getElementById('duration').value; // Thời điểm kết thúc cắt (giây)
+        var videoUrl = video.src;
+        var videoName = videoUrl.split('/').pop();
+  
+        var mediaSource = new MediaSource();
+      var videoBlob = null;
+      var sourceBuffer = null;
+
+      mediaSource.addEventListener('sourceopen', function() {
+        sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+        sourceBuffer.addEventListener('updateend', function() {
+          if (!sourceBuffer.updating && mediaSource.readyState === 'open') {
+            mediaSource.endOfStream();
+            videoBlob = new Blob(mediaSource.sourceBuffers.map(function(sb) { return sb.buffered }), { type: 'video/mp4' });
+
+            var anchor = document.createElement('a');
+            anchor.href = URL.createObjectURL(videoBlob);
+            anchor.download = videoName;
+            anchor.click();
+
+            mediaSource.removeEventListener('sourceopen', arguments.callee);
+          }
+        });
+
+        fetch(videoUrl)
+          .then(response => response.arrayBuffer())
+          .then(function(buffer) {
+            sourceBuffer.appendBuffer(buffer);
+          });
+      });
+
+      video.currentTime = startTime;
+      video.play();
+
+      video.addEventListener('timeupdate', function() {
+        if (video.currentTime >= endTime) {
+          video.pause();
+          mediaSource.endOfStream();
+        }
+      });
+    }
+    </script>
+
+<%- include ("includes/footer") %>

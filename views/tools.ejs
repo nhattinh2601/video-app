@@ -1,0 +1,55 @@
+<%- include ("includes/header") %>
+
+    
+
+      <div class="container" style="height: 700px; width: 1200px; margin-top: 10px;margin-right: 100px; overflow-y:auto;" >
+    <div style="display: flex; height: 20%; width: 100%; margin-top: 30px;justify-content: space-around;">  
+        
+        <div style="border: 1px solid #eceff3; border-radius: 10px; height: 100%; width: 20%;display: flex; justify-content: center;align-items: center;">
+            <div>
+            <h1 style="font-size: 25px;">Cut Video</h1>
+            <form action="/tool-cut-video">
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;border-radius: 5px;">Convert now</button>
+            </form>
+        </div>
+        </div>
+        <div style="border: 1px solid #eceff3; border-radius: 10px; height: 100%; width: 20%;display: flex; justify-content: center;align-items: center">
+            <div>
+            <h1 style="font-size: 25px;">Compress Video</h1>
+            <div style="display: flex; justify-content: center; align-items: center;">
+            <form action="/tool_compress_video">
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;border-radius: 5px;">Convert now</button>
+            </form></div></div>
+        </div>
+        <div style="border: 1px solid #eceff3; border-radius: 10px; height: 100%; width: 20%;display: flex; justify-content: center;align-items: center">
+            <div>
+            <h1 style="font-size: 25px;">Capture Video</h1>
+            <div style="display: flex; justify-content: center; align-items: center;">
+            <form action="/tool_capture" >
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;border-radius: 5px;">Convert now</button>
+            </form></div></div>
+        </div>
+    </div> 
+    <div style="display: flex; height: 20%; width: 100%; margin-top: 30px;justify-content: space-around;">  
+        <div style="border: 1px solid #eceff3; border-radius: 10px; height: 100%; width: 20%;display: flex; justify-content: center;align-items: center">
+            <div>
+            <h1 style="font-size: 25px;">Remove Audio</h1>
+            <div style="display: flex; justify-content: center; align-items: center;">
+            <form action="/tool-remove-audio" >
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;border-radius: 5px;">Remove Audio</button>
+            </form></div></div>
+        </div>
+        <div style="border: 1px solid #eceff3; border-radius: 10px; height: 100%; width: 20%;display: flex; justify-content: center;align-items: center">
+            <div>
+            <h1 style="font-size: 25px;">Merge Videos</h1>
+            <div style="display: flex; justify-content: center; align-items: center;">
+            <form action="/tool_merge_video">
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;border-radius: 5px;">Merge</button>
+            </form></div></div>
+        </div>
+
+       </div> 
+      </div>
+      <!-- /.container-fluid -->
+
+<%- include ("includes/footer") %>
