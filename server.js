@@ -24,20 +24,20 @@ const { time } = require("console");
 const userModule = require("./user-module");
 const videoModule = require("./video-module");
 
-// app.use(express.static('uploads'))
+app.use(express.static('uploads'))
 
-// const storage = multer.diskStorage({
-// 	destination: (req, file, cb) => {
-// 		cb(null, 'uploads')
-// 	},
-// 	filename: (req, file, cb) => {
-// 		cb(null, file.originalname)
-// 	}
-// })
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads')
+	},
+	filename: (req, file, cb) => {
+		cb(null, file.originalname)
+	}
+})
 
-// let upload = multer({
-// 	storage: storage
-// })
+let upload = multer({
+	storage: storage
+})
 
 app.use(function (req, res, next) {
 	res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
