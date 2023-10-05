@@ -1,5 +1,7 @@
 # video-app
 
-<h5>npm install express</h5>
-<h5>npm install nodemon</h5>
-<h5>nodemon server.js</h5>
+<p>Cách chạy project:
+    npm install express
+    npm install nodemon
+    nodemon server.js (hoặc node server.js)
+</p>

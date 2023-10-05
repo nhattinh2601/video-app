@@ -5,6 +5,7 @@ const { getVideoDurationInSeconds } = require('get-video-duration');
 var ObjectId = require("mongodb").ObjectId;
 var formidable = require("formidable");
 
+
 let database; 
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
             formData.maxFileSize = 1000 * 1024 * 1204;
             formData.parse(request, function (error1, fields, files) {
                 var oldPath = files.video.path;
-                var newPath = "public/videos/" + new Date().getTime() + "-" + files.video.name;
+                var newPath = "uploads/videos/" + new Date().getTime() + "-" + files.video.name;
 
                 var title = fields.title;
                 var description = fields.description;
@@ -28,7 +29,7 @@ module.exports = {
                 var thumbnail = fields.thumbnailPath;
 
                 var oldPathThumbnail = files.thumbnail.path;
-                var thumbnail = "public/thumbnails/" + new Date().getTime() + "-" + files.thumbnail.name;
+                var thumbnail = "uploads/thumbnails/" + new Date().getTime() + "-" + files.thumbnail.name;
 
                 fileSystem.rename(oldPathThumbnail, thumbnail, function (error2) {
                     console.log("thumbnail upload error = ", error2);
@@ -138,7 +139,7 @@ module.exports = {
                     }
 
                     var oldPath = files.thumbnail.path;
-                    var newPath = "public/thumbnails/" + new Date().getTime() + "-" + files.thumbnail.name;
+                    var newPath = "uploads/thumbnails/" + new Date().getTime() + "-" + files.thumbnail.name;
                     thumbnail = newPath;
 
                     fileSystem.rename(oldPath, newPath, function (error2) {

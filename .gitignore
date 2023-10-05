@@ -1,5 +1,5 @@
-public/thumbnails/*
-public/videos/*
+uploads/thumbnails/*
+uploads/videos/*
 
 # Logs
 logs
